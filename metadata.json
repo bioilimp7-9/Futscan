@@ -1,0 +1,6 @@
+{
+  "name": "FOODSCAN AI 2.0",
+  "description": "SMART FOOD ANALYSIS SYSTEM — Тағам өнімдерінің қоректік құрамын, сыртқы визуалды белгілерін, химиялық pH көрсеткіштерін және сақтау жағдайларын талдау жүйесі.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

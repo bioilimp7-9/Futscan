@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0A2540" />
+  <meta name="description" content="FOODSCAN AI — Жасөспірімдерге арналған тағам өнімдерінің құрамын цифрлық талдау жүйесі." />
+
+  <!-- iPhone / iPad Safari PWA Meta Tags -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="FOODSCAN AI 2.0" />
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png" />
+
+  <!-- Standard PWA Manifest & Icons -->
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png" />
+
+  <title>FOODSCAN AI 2.0 — SMART FOOD ANALYSIS SYSTEM</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Top App Bar -->
+    <header class="top-bar">
+      <div class="top-bar-inner">
+        <div class="brand-row" onclick="navigateTo('dashboard')">
+          <div class="logo-badge" aria-hidden="true">
+            <svg viewBox="0 0 36 36" width="24" height="24" fill="none">
+              <path d="M4 11V7a3 3 0 0 1 3-3h4M25 4h4a3 3 0 0 1 3 3v4M32 25v4a3 3 0 0 1-3 3h-4M11 32H7a3 3 0 0 1-3-3v-4" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round"/>
+              <path d="M11 23c0-6.5 4.8-11 12-11-1 6.5-5.5 11-12 11Z" fill="#D1FAE5" stroke="#FFFFFF" stroke-width="1.6"/>
+              <circle cx="23" cy="12" r="2.2" fill="#10B981"/>
+            </svg>
+          </div>
+          <div>
+            <div class="brand-title">FOODSCAN AI 2.0</div>
+            <div class="brand-slogan">SMART FOOD ANALYSIS SYSTEM</div>
+          </div>
+        </div>
+
+        <div class="top-actions">
+          <button id="install-pwa-btn" class="icon-pill-btn hidden" onclick="handleInstallClick()" title="Басты экранға орнату">
+            <span>Орнату</span>
+          </button>
+          <button class="icon-btn" onclick="navigateTo('unified')" title="Біріктірілген есеп (A–D)" aria-label="Біріктірілген есеп">
+            📑
+          </button>
+          <button class="icon-btn" onclick="navigateTo('about')" title="Зерттеу жобасы туралы" aria-label="Зерттеу жобасы туралы">
+            🎓
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Desktop / Tablet Side Rail + Main Content -->
+    <div class="layout-frame">
+      <aside class="side-rail" aria-label="Негізгі мәзір">
+        <button class="rail-btn active" data-screen="dashboard" onclick="navigateTo('dashboard')">🏠 <span>Басты</span></button>
+        <button class="rail-btn" data-screen="scanner" onclick="navigateTo('scanner')">📷 <span>Құрамын сканерлеу</span></button>
+        <button class="rail-btn" data-screen="freshness" onclick="navigateTo('freshness')">👁️ <span>Балғындықты талдау</span></button>
+        <button class="rail-btn" data-screen="chemical" onclick="navigateTo('chemical')">🧪 <span>Химиялық pH талдау</span></button>
+        <button class="rail-btn" data-screen="storage" onclick="navigateTo('storage')">🌡️ <span>Сақтау жағдайы</span></button>
+        <button class="rail-btn" data-screen="unified" onclick="navigateTo('unified')">📑 <span>Біріктірілген есеп</span></button>
+        <button class="rail-btn" data-screen="comparison" onclick="navigateTo('comparison')">⚖️ <span>Салыстыру</span></button>
+        <button class="rail-btn" data-screen="research" onclick="navigateTo('research')">🧬 <span>Зертхана</span></button>
+        <button class="rail-btn" data-screen="protocol" onclick="navigateTo('protocol')">📋 <span>Хаттама (6)</span></button>
+        <button class="rail-btn" data-screen="survey" onclick="navigateTo('survey')">📊 <span>Сауалнама</span></button>
+        <button class="rail-btn" data-screen="education" onclick="navigateTo('education')">📘 <span>Білім</span></button>
+        <button class="rail-btn" data-screen="about" onclick="navigateTo('about')">🎓 <span>Жоба</span></button>
+      </aside>
+
+      <main class="main-shell" style="flex:1; width:100%;">
+        <div id="offline-banner" class="offline-banner hidden" role="status" aria-live="polite">
+          <span>📴 Офлайн режим — FOODSCAN AI кэштелген. Сақталған зерттеулер мен білім базасын қарау қолжетімді.</span>
+        </div>
+        <div id="app-content" class="main-content" role="main"></div>
+      </main>
+    </div>
+
+    <!-- Mobile Bottom Navigation (iPhone Safari & Android Chrome) -->
+    <nav class="bottom-nav" aria-label="Төменгі навигация">
+      <button class="nav-btn active" data-screen="dashboard" onclick="navigateTo('dashboard')">
+        <span class="nav-icon">🏠</span>
+        <span class="nav-label">Басты</span>
+      </button>
+      <button class="nav-btn" data-screen="scanner" onclick="navigateTo('scanner')">
+        <span class="nav-icon">📷</span>
+        <span class="nav-label">Сканер</span>
+      </button>
+      <button class="nav-btn" data-screen="comparison" onclick="navigateTo('comparison')">
+        <span class="nav-icon">⚖️</span>
+        <span class="nav-label">Салыстыру</span>
+      </button>
+      <button class="nav-btn" data-screen="research" onclick="navigateTo('research')">
+        <span class="nav-icon">🧪</span>
+        <span class="nav-label">Зертхана</span>
+      </button>
+      <button class="nav-btn" data-screen="education" onclick="navigateTo('education')">
+        <span class="nav-icon">📘</span>
+        <span class="nav-label">Білім</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- iOS Safari Install Guide Modal -->
+  <div id="ios-install-modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <h3>iPhone (Safari) басты экранына қосу</h3>
+      <p>FOODSCAN AI қосымшасын iPhone-да толық экранды режимде орнату үшін:</p>
+      <ol class="guide-list">
+        <li>Safari браузерінің төменгі жағындағы <strong>«Бөлісу» (Share ⬆️)</strong> батырмасын басыңыз.</li>
+        <li>Тізімнен <strong>«Басты экранға қосу» (Add to Home Screen)</strong> тармағын таңдаңыз.</li>
+        <li>Оң жақ жоғарғы бұрыштағы <strong>«Қосу» (Add)</strong> түймесін басыңыз.</li>
+      </ol>
+      <button class="btn-primary full-width" onclick="closeIosModal()">Түсінікті</button>
+    </div>
+  </div>
+
+  <!-- Live Camera Modal (Mobile & Desktop Browser Permission Flow) -->
+  <div id="live-camera-modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <h3 style="margin-top:0;">Камерамен түсіру</h3>
+      <div class="camera-viewport" style="background:#000; border-radius:12px; overflow:hidden; margin-bottom:10px; min-height:200px; display:flex; align-items:center; justify-content:center;">
+        <video id="live-camera-video" playsinline autoplay muted style="width:100%; max-height:300px; object-fit:cover;"></video>
+        <div id="live-camera-reticle" class="camera-reticle" aria-hidden="true"></div>
+      </div>
+      <div id="live-camera-error" class="warning-box hidden"></div>
+      <div class="btn-grid-2">
+        <button class="btn-primary" onclick="captureLiveCameraFrame()">📸 Суретке түсіру</button>
+        <button class="btn-outline" onclick="closeLiveCameraModal()">Жабу</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="modules20.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

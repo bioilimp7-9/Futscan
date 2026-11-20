@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0A2540" />
+  <meta name="description" content="FreshGuard iOS — Табиғи индикатор түсінің өзгеруін цифрлық датчиктермен байланыстырып, тағам балғындығын бақылайтын iPhone қосымшасы." />
+
+  <!-- iPhone / iPad Safari Native Web App Meta Tags -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="FreshGuard" />
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png" />
+
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png" />
+
+  <title>FreshGuard iOS — Тағам балғындығын бақылау</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="ios-shell">
+    <!-- iOS Translucent Navigation Bar -->
+    <header class="ios-navbar">
+      <div class="ios-navbar-inner">
+        <div class="brand-group" onclick="setTab('monitor')">
+          <img src="icons/apple-touch-icon.png" alt="FreshGuard" class="ios-app-icon" />
+          <div>
+            <div class="ios-nav-title">FreshGuard iOS</div>
+            <div class="ios-nav-subtitle">Табиғи индикатор • Датчиктер</div>
+          </div>
+        </div>
+        <button id="ios-install-pill" class="ios-pill-btn" onclick="openInstallSheet()">
+          iPhone-ға қосу
+        </button>
+      </div>
+    </header>
+
+    <!-- Offline Status Banner -->
+    <div id="offline-banner" class="ios-offline-banner hidden" role="status">
+      📴 Офлайн режим — iPhone кэші белсенді. Сақталған датчик журналы мен ғылым бөлімі қолжетімді.
+    </div>
+
+    <!-- Main Scrollable Viewport -->
+    <main id="ios-content" class="ios-content" role="main"></main>
+
+    <!-- iOS Frosted Tab Bar -->
+    <nav class="ios-tabbar" aria-label="iPhone мәзірі">
+      <button class="tab-item active" data-tab="monitor" onclick="setTab('monitor')">
+        <span class="tab-ico">🌡️</span>
+        <span class="tab-txt">Монитор</span>
+      </button>
+      <button class="tab-item" data-tab="indicator" onclick="setTab('indicator')">
+        <span class="tab-ico">🎨</span>
+        <span class="tab-txt">Индикатор</span>
+      </button>
+      <button class="tab-item" data-tab="science" onclick="setTab('science')">
+        <span class="tab-ico">🔬</span>
+        <span class="tab-txt">Ғылым</span>
+      </button>
+      <button class="tab-item" data-tab="history" onclick="setTab('history')">
+        <span class="tab-ico">📈</span>
+        <span class="tab-txt">Журнал</span>
+      </button>
+      <button class="tab-item" data-tab="iphone" onclick="setTab('iphone')">
+        <span class="tab-ico">📱</span>
+        <span class="tab-txt">iPhone</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- iPhone Safari Add-to-Home-Screen Sheet -->
+  <div id="ios-sheet-backdrop" class="ios-sheet-backdrop hidden" onclick="closeInstallSheet()">
+    <div class="ios-sheet" onclick="event.stopPropagation()">
+      <div class="sheet-handle"></div>
+      <h3>iPhone басты экранына орнату</h3>
+      <p class="sheet-desc">Қосымшаны iPhone-да App Store-сыз жеке толық экранды iOS қосымшасы ретінде іске қосу:</p>
+      <ol class="sheet-steps">
+        <li>Осы бетті iPhone-дағы <strong>Safari</strong> браузерімен ашыңыз.</li>
+        <li>Төменгі панельдегі <strong>«Бөлісу» (Share ⬆️)</strong> белгішесін басыңыз.</li>
+        <li>Тізімнен <strong>«Басты экранға қосу» (Add to Home Screen)</strong> тармағын таңдаңыз.</li>
+        <li>Жоғарғы оң бұрыштағы <strong>«Қосу» (Add)</strong> түймесін басыңыз.</li>
+      </ol>
+      <button class="ios-btn ios-btn-blue full-width" onclick="closeInstallSheet()">Түсінікті</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
